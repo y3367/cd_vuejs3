@@ -1,0 +1,35 @@
+{
+  "name": "@cd_vuejs3/helpers",
+  "version": "0.0.1-beta.0",
+  "description": "vuejs3 helpers",
+  "private": true,
+  "keywords": [
+    "cd_vuejs3"
+  ],
+  "author": "y3367",
+  "license": "MIT",
+  "repository": "github:y3367/cd_vuejs3",
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./dist/src/index.d.ts",
+  "exports": "./dist/src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=7"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "npm run prebuild && tsc",
+    "prebuild": "rm -rf dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "element-plus": "^2.3.9"
+  }
+}

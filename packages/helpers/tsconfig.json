@@ -1,0 +1,33 @@
+{
+  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "src/**/*", "src/**/*.ts", "src/**/*.tsx", "src/**/*.json", "src/**/*.d.ts", "src/**/*.vue", "./*.d.ts", "types/*.d.ts"],
+  "exclude": ["node_modules", "src/**/__tests__/*"],
+  "display": "Node 20",
+  "compilerOptions": {
+    "ignoreDeprecations": "5.0",
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "useDefineForClassFields": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "composite": true,
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "experimentalDecorators": true,
+    "strictFunctionTypes": false,
+    "strict": true,
+    "noImplicitThis": true,
+    "module": "ESNext",
+    "allowJs": true,
+    "target": "ESNext",
+    "baseUrl": ".",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["node", "jsdom", "vite/client", "element-plus/global", "unplugin-icons/types/vue"],
+    "outDir": "./dist/"
+  }
+}
