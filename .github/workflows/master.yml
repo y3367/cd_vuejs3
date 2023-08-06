@@ -17,9 +17,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup pnpm
-          uses: pnpm/action-setup@v2
-          with:
-            version: ^8.0
+        uses: pnpm/action-setup@v2
+        with:
+          version: ^8.0
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
