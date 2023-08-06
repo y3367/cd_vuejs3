@@ -38,13 +38,16 @@ jobs:
       - name: setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: ^8.0
+          version: 8
 
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
+          always-auth: true
           node-version: 16
           registry-url: https://registry.npmjs.org
+          scope: '@octocat'
+          cache: 'pnpm'
 
       - name: install pnpm
         run: npm i pnpm@latest -g
