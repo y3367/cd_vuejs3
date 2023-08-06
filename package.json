@@ -9,11 +9,13 @@
   },
   "scripts": {
     "preinstall": "node ./scripts/preinstall.js && npx only-allow pnpm",
+    "build": "pnpm build:utils && pnpm build:helpers",
     "dev:helpers": "pnpm -F helpers dev",
     "build:helpers": "pnpm -F helpers build",
     "build-only:helpers": "pnpm -F helpers build-only",
     "prebuild:helpers": "pnpm -F helpers prebuild",
     "dev:utils": "pnpm -F utils dev",
+    "build:utils": "pnpm -F utils build",
     "build-only:utils": "pnpm -F utils build-only",
     "prebuild:utils": "pnpm -F utils prebuild",
     "test:unit": "vitest --environment jsdom --root src/",
