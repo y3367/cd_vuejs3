@@ -7,6 +7,9 @@
     "node": ">=16",
     "pnpm": ">=7"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "preinstall": "node ./scripts/preinstall.js && npx only-allow pnpm",
     "build": "pnpm build:utils && pnpm build:helpers",
@@ -25,7 +28,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
     "ci:version": "changeset version && pnpm install",
-    "ci:publish": "pnpm publish -r",
+    "ci:publish": "pnpm publish -r && changeset publish --registry=https://registry.npmjs.com/",
     "prepare": "husky install"
   },
   "devDependencies": {
