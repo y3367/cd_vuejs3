@@ -27,8 +27,9 @@
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' :4173 'cypress open --e2e'",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
+    "changeset": "changeset",
     "ci:version": "changeset version && pnpm install",
-    "ci:publish": "pnpm publish -r && pnpm changeset publish --registry=https://registry.npmjs.com/ --tag=beta --access=publish --no-git-checks",
+    "ci:publish": "pnpm publish -r  --no-git-checks && pnpm changeset publish --registry=https://registry.npmjs.com/ --tag=beta --access=publish --no-git-checks",
     "prepare": "husky install"
   },
   "devDependencies": {
