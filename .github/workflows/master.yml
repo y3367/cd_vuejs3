@@ -3,9 +3,13 @@ on:
   push:
     branches:
       - master
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 env:
   CI: true
   PNPM_CACHE_FOLDER: .pnpm-store
+
 jobs:
   version:
     if: ${{ github.repository_owner == 'y3367' }}
@@ -28,6 +32,14 @@ jobs:
         with:
           node-version: 16
 
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: install pnpm
         run: npm i pnpm@latest -g
 
@@ -47,9 +59,14 @@ jobs:
         uses: changesets/action@v1
         with:
           version: pnpm ci:version
+          publish: pnpm ci:publish --no-git-checks
           commit: "chore: update versions"
           title: "chore: update versions"
-          publish: pnpm ci:publish --no-git-checks
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Send a Slack notification if a publish happens
+        if: steps.changesets.outputs.published == 'true'
+        # You can do something when a publish happens.
+        run: my-slack-bot send-notification --message "A new version of ${GITHUB_REPOSITORY} was published!"
