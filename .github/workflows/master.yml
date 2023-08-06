@@ -46,7 +46,7 @@ jobs:
           always-auth: true
           node-version: 16
           registry-url: https://registry.npmjs.org
-          scope: '@cd_vuejs3'
+          scope: '@cd-vuejs3'
           cache: 'pnpm'
 
       - name: install pnpm

@@ -1,6 +1,6 @@
 {
-  "name": "@cd_vuejs3/helpers",
-  "version": "0.0.1",
+  "name": "@cd-vuejs3/helpers",
+  "version": "0.0.2",
   "description": "vuejs3 helpers",
   "keywords": [
     "cd_vuejs3"
@@ -33,7 +33,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@cd_vuejs3/utils": "workspace: *",
+    "@cd-vuejs3/utils": "workspace: *",
     "@vueuse/components": "^10.3.0",
     "@vueuse/core": "^10.3.0",
     "axios": "^1.4.0",

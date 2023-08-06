@@ -12,7 +12,7 @@ import type { EasingFunction } from "@vueuse/core";
 import { computed, watch, reactive } from "vue";
 import { TransitionPresets, useTransition } from "@vueuse/core";
 import { Decimal } from "decimal.js";
-import { BnFormat, BnFormatAndSeparate, BnToNumber } from "packages/utils/index";
+import { BnFormat, BnFormatAndSeparate, BnToNumber } from "@cd-vuejs3/utils";
 
 defineOptions({
   name: "CdNumber"

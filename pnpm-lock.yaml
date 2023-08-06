@@ -65,7 +65,7 @@ importers:
 
   packages/helpers:
     dependencies:
-      '@cd_vuejs3/utils':
+      '@cd-vuejs3/utils':
         specifier: 'workspace: *'
         version: link:../utils
       '@vueuse/components':
