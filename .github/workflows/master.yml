@@ -11,30 +11,39 @@ jobs:
     if: ${{ github.repository_owner == 'y3367' }}
     timeout-minutes: 15
     runs-on: ubuntu-latest
+    permissions: read-all
     steps:
       - name: checkout code repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: ^8.0
+
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'pnpm'
+
       - name: install pnpm
         run: npm i pnpm@latest -g
+
       - name: Setup npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
+
       - name: install dependencies
         run: pnpm install --no-frozen-lockfile
+
       - name: Build Packages
         run: pnpm run build
+
       - name: create and publish versions
         uses: changesets/action@v1
         with:
