@@ -8,11 +8,13 @@
     "pnpm": ">=7"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "preinstall": "node ./scripts/preinstall.js && npx only-allow pnpm",
     "build": "pnpm build:utils && pnpm build:helpers",
+    "build-only": "pnpm build-only:utils && pnpm build-only:helpers",
     "dev:helpers": "pnpm -F helpers dev",
     "build:helpers": "pnpm -F helpers build",
     "build-only:helpers": "pnpm -F helpers build-only",

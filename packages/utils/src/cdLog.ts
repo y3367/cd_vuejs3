@@ -5,11 +5,11 @@ export const cdChalkInstance = (): ChalkInstance => {
   return chalk;
 };
 
-export const cdLogChalk = (ci: ChalkInstance, message?: any[], ...optionalParams: any[]) => {
+export const cdLogChalk = (ci: ChalkInstance, message?: any, ...optionalParams: any[]) => {
   console.log(ci(message, ...optionalParams));
 };
 
-export const cdLog = (message?: any[], ...optionalParams: any[]) => {
+export const cdLog = (message?: any, ...optionalParams: any[]) => {
   // console.log(message, ...optionalParams);
   const ci: ChalkInstance = cdChalkInstance().green;
   cdLogChalk(ci, message, ...optionalParams);
