@@ -18,12 +18,14 @@
     "build:utils": "pnpm -F utils build",
     "build-only:utils": "pnpm -F utils build-only",
     "prebuild:utils": "pnpm -F utils prebuild",
+    "test": "echo \"Error: no test specified\"",
     "test:unit": "vitest --environment jsdom --root src/",
     "test:e2e": "start-server-and-test preview :4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' :4173 'cypress open --e2e'",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
-    "ci:publish": "pnpm publish -r"
+    "ci:publish": "pnpm publish -r",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
@@ -38,6 +40,7 @@
     "eslint-plugin-jest": "^27.2.3",
     "eslint-plugin-prettier": "5.0.0",
     "eslint-plugin-vue": "^9.16.1",
+    "husky": "^8.0.0",
     "jsdom": "^22.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3",
