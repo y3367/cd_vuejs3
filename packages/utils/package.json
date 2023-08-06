@@ -1,8 +1,7 @@
 {
   "name": "@cd_vuejs3/utils",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "vuejs3 utils",
-  "private": true,
   "keywords": [
     "cd_vuejs3"
   ],

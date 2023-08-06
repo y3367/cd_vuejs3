@@ -1,5 +1,5 @@
 {
-  "name": "modules",
+  "name": "cd_vuejs3",
   "version": "0.0.1-beta.0",
   "private": true,
   "type": "module",
@@ -29,7 +29,8 @@
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
     "changeset": "changeset",
     "ci:version": "changeset version && pnpm install",
-    "ci:publish": "pnpm changeset publish --registry=https://registry.npmjs.com/ --tag=beta --access=publish --no-git-checks && pnpm publish -r  --no-git-checks",
+    "ci:release": "pnpm changeset publish -r --tag next --registry=https://registry.npmjs.com/ --no-git-checks --access=public --publish-branch=master && pnpm ci:publish:npm",
+    "ci:publish": "pnpm publish -r --tag next --registry=https://registry.npmjs.com/ --no-git-checks --access=public --publish-branch=master",
     "prepare": "husky install"
   },
   "devDependencies": {
