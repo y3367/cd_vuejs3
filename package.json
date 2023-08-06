@@ -28,7 +28,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
     "ci:version": "changeset version && pnpm install",
-    "ci:publish": "pnpm publish -r && changeset publish --registry=https://registry.npmjs.com/",
+    "ci:publish": "pnpm publish -r && pnpm changeset publish --registry=https://registry.npmjs.com/",
     "prepare": "husky install"
   },
   "devDependencies": {
