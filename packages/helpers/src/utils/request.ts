@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRequest, setGlobalOptions } from "vue-request";
 import { closeCdLoading, openCdLoading } from "./cdLoading";
 import { cdNotifyError } from "./cdUI";
-import { cdLogError } from "./cdLog";
+import { cdLogError } from "@cd_vuejs3/utils";
 
 /**
  * https://github.com/attojs/vue-request

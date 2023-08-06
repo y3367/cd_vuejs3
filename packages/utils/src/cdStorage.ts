@@ -1,4 +1,4 @@
-import { setKeyWithEnv } from "./common";
+import { setKeyWithEnv } from "./cdCommon";
 
 const STORAGE_TYPE_COOKIE: string = "cookie";
 const STORAGE_TYPE_LOCALSTORAGE: string = "localStorage";

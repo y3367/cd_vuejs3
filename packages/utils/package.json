@@ -1,0 +1,42 @@
+{
+  "name": "@cd_vuejs3/utils",
+  "version": "0.0.1-beta.0",
+  "description": "vuejs3 utils",
+  "private": true,
+  "keywords": [
+    "cd_vuejs3"
+  ],
+  "author": "y3367",
+  "license": "MIT",
+  "repository": "github:y3367/cd_vuejs3",
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./dist/src/index.d.ts",
+  "exports": "./dist/src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=7"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "npm run prebuild && npm run build-only",
+    "build-only": "tsc",
+    "prebuild": "rm -rf dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bowser": "^2.11.0",
+    "dayjs": "^1.11.9",
+    "decimal.js": "^10.4.3",
+    "mobile-detect": "^1.4.5"
+  },
+  "devDependencies": {
+    "chalk": "^5.3.0"
+  }
+}
