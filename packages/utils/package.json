@@ -8,7 +8,10 @@
   ],
   "author": "y3367",
   "license": "MIT",
-  "repository": "github:y3367/cd_vuejs3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/y3367/cd_vuejs3.git"
+  },
   "type": "module",
   "main": "./index.ts",
   "types": "./dist/src/index.d.ts",
