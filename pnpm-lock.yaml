@@ -45,7 +45,7 @@ importers:
         specifier: ^9.16.1
         version: 9.16.1(eslint@8.46.0)
       husky:
-        specifier: ^8.0.3
+        specifier: ^8.0.0
         version: 8.0.3
       jsdom:
         specifier: ^22.1.0
