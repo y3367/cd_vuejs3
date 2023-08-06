@@ -11,7 +11,7 @@ jobs:
     if: ${{ github.repository_owner == 'y3367' }}
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    permissions: read-all
+    permissions: write-all
     steps:
       - name: checkout code repository
         uses: actions/checkout@v3
