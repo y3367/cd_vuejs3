@@ -16,10 +16,19 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: write
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      id-token: write
+      issues: write
+      discussions: write
       packages: write
-
+      pages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: read
     steps:
       - name: checkout code repository
         uses: actions/checkout@v3
@@ -35,7 +44,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: https://registry.npmjs.org
 
       - name: install pnpm
         run: npm i pnpm@latest -g
