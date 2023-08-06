@@ -29,7 +29,7 @@
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
     "changeset": "changeset",
     "ci:version": "changeset version && pnpm install",
-    "ci:publish": "pnpm publish -r  --no-git-checks && pnpm changeset publish --registry=https://registry.npmjs.com/ --tag=beta --access=publish --no-git-checks",
+    "ci:publish": "pnpm changeset publish --registry=https://registry.npmjs.com/ --tag=beta --access=publish --no-git-checks && pnpm publish -r  --no-git-checks",
     "prepare": "husky install"
   },
   "devDependencies": {
