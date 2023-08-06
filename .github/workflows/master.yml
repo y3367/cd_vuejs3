@@ -59,7 +59,7 @@ jobs:
         uses: changesets/action@v1
         with:
           version: pnpm ci:version
-          publish: pnpm ci:publish --no-git-checks
+          publish: pnpm ci:publish
           commit: "chore: update versions"
           title: "chore: update versions"
         env:
