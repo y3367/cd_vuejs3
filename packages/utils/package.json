@@ -12,9 +12,22 @@
     "url": "https://github.com/y3367/cd_vuejs3.git"
   },
   "type": "module",
-  "main": "./index.ts",
-  "types": "./dist/src/index.d.ts",
-  "exports": "./dist/src/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./unstyled": {
+      "types": "./dist/unstyled.d.ts",
+      "import": "./dist/unstyled.js",
+      "require": "./dist/unstyled.cjs"
+    },
+    "./*": "./*"
+  },
   "publishConfig": {
     "access": "public"
   },
