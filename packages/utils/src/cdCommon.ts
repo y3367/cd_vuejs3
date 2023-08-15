@@ -2,7 +2,7 @@ import { cdLogError } from "./cdLog";
 
 export const setKeyWithEnv = (key: string): string => {
   // @ts-ignore
-  return `${import.meta.env?.MODE ?? "development"}_${import.meta.env?.VITE_APP_NAME ?? "cd"}_${key}`;
+  return `${import.meta.env?.MODE ?? process.env?.NODE_MODE ?? "development"}_${import.meta.env?.VITE_APP_NAME ?? process.env?.APP_NAME ?? "CD"}_${key}`;
 };
 
 export function isValidKey(key: string | number | symbol, object: object): key is keyof typeof object {
