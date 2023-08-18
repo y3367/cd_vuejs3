@@ -1,9 +1,6 @@
-import { jest } from "@jest/globals";
-
-// jest.useRealTimers();
-
 module.exports = {
-  preset: "ts-jest",
+  preset: "ts-jest/presets/default-esm",
   testEnvironment: "jsdom",
+  // testRegex: "(/__tests__/.*\\.spec\\.ts)$",
   extensionsToTreatAsEsm: [".ts"]
 };
