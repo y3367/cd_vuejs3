@@ -95,4 +95,4 @@ export function request<R, P extends unknown[] = [], T extends boolean = boolean
   return returnAxios ? axiosService : useRequest<R, P>(axiosService, options);
 }
 
-export default request;
+export default { request };

@@ -3,4 +3,4 @@ import { withInstall } from "element-plus/es/utils";
 import CdNumberVue from "./cdNumber.vue";
 
 export const CdNumber = withInstall(CdNumberVue);
-export default CdNumber;
+export default { CdNumberVue, CdNumber };

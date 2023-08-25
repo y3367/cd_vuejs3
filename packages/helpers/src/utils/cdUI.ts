@@ -1,28 +1,47 @@
+import type { NotificationParams } from "element-plus";
 import { ElNotification } from "element-plus";
 import "element-plus/es/components/notification/style/css";
 import "element-plus/es/components/notification/style/index";
 
-export const cdNotify = (titleValue: string, typeValue: any = "success", positionValue: any = "top-right", showClose: boolean = true) => {
-  ElNotification({
-    title: titleValue,
-    type: typeValue,
-    position: positionValue,
-    showClose: showClose
-  });
+export const cdNotify = (options?: NotificationParams) => {
+  if (!options) {
+    return;
+  }
+  if (!options["title"]) {
+    return;
+  }
+
+  ElNotification(Object.assign({ type: "success", position: "top-right", showClose: true }, options));
 };
 
-export const cdNotifySuccess = (titleValue: string, positionValue: any = "top-right", showClose: boolean = true) => {
-  cdNotify(titleValue, "success", positionValue, showClose);
+export const cdNotifySuccess = (title: string, options: NotificationParams = {}) => {
+  cdNotify(Object.assign({}, options, { title, type: "success" }));
 };
 
-export const cdNotifyError = (titleValue: string, positionValue: any = "top-right", showClose: boolean = true) => {
-  cdNotify(titleValue, "error", positionValue, showClose);
+export const cdNotifyError = (title: string, options: NotificationParams = {}) => {
+  cdNotify(Object.assign({}, options, { title, type: "error" }));
 };
 
-export const cdNotifyWarning = (titleValue: string, positionValue: any = "top-right", showClose: boolean = true) => {
-  cdNotify(titleValue, "warn", positionValue, showClose);
+export const cdNotifyWarning = (title: string, options: NotificationParams = {}) => {
+  cdNotify(Object.assign({}, options, { title, type: "warn" }));
 };
 
-export const cdNotifyInfo = (titleValue: string, positionValue: any = "top-right", showClose: boolean = true) => {
-  cdNotify(titleValue, "info", positionValue, showClose);
+export const cdNotifyInfo = (title: string, options: NotificationParams = {}) => {
+  cdNotify(Object.assign({}, options, { title, type: "info" }));
+};
+
+export interface CdFeedbackProps {
+  notify: Function;
+  notifySuccess: typeof cdNotifySuccess;
+  notifyError: Function;
+  notifyWarning: Function;
+  notifyInfo: Function;
+}
+
+export const CdFeedback: CdFeedbackProps = {
+  notify: cdNotify,
+  notifySuccess: cdNotifySuccess,
+  notifyError: cdNotifyError,
+  notifyWarning: cdNotifyWarning,
+  notifyInfo: cdNotifyInfo
 };

@@ -1,5 +1,5 @@
 {
-  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "src/**/*", "src/**/*.ts", "src/**/*.tsx", "src/**/*.json", "src/**/*.d.ts", "src/**/*.vue", "./*.d.ts", "types/*.d.ts"],
+  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*","./*.d.ts", "./index.ts",  "src/**/*", "src/**/*.ts", "src/**/*.tsx", "src/**/*.json", "src/**/*.d.ts", "src/**/*.vue", "types/*.d.ts"],
   "exclude": ["node_modules", "src/**/__tests__/*"],
   "display": "Node 20",
   "compilerOptions": {

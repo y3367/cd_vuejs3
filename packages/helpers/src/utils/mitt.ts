@@ -29,9 +29,9 @@ export interface Emitter<Events extends Record<EventType, unknown>> {
 /**
  * Mitt: Tiny (~200b) functional event emitter / pubsub.
  * @name mitt
- * @returns {Mitt}
+ * @returns {Emitter}
  */
-export default function mitt<Events extends Record<EventType, unknown>>(all?: EventHandlerMap<Events>, once?: Set<Handler<Events[keyof Events]> | WildcardHandler<Events>>): Emitter<Events> {
+export function mitt<Events extends Record<EventType, unknown>>(all?: EventHandlerMap<Events>, once?: Set<Handler<Events[keyof Events]> | WildcardHandler<Events>>): Emitter<Events> {
   type GenericEventHandler = Handler<Events[keyof Events]> | WildcardHandler<Events>;
   all = all ?? new Map();
   once = once ?? new Set();
