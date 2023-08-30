@@ -7,7 +7,8 @@ export const cdNotify = (options?: NotificationParams) => {
   if (!options) {
     return;
   }
-  if (!options["title"]) {
+  // ts-ignore
+  if (!options?.["title"]) {
     return;
   }
 

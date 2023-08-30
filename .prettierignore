@@ -4,6 +4,7 @@
 .editorconfig
 pnpm-lock.yaml
 .npmrc
+node_modules
 
 # Ignored suffix
 *.log
@@ -22,7 +23,9 @@ test
 ## Built-files
 .cache
 dist
+dist-ssr
 template
+*.local
 
 *auto-imports.d.ts
 *components.d.ts
