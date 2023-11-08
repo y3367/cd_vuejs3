@@ -29,8 +29,8 @@
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
     "changeset": "changeset",
     "ci:version": "changeset version && pnpm install",
-    "ci:release": "pnpm changeset publish -r --tag next --registry=https://registry.npmjs.com --no-git-checks --access=public --publish-branch=master && pnpm ci:publish",
-    "ci:publish": "pnpm -r publish utils --tag next --registry=https://registry.npmjs.com/ --no-git-checks --access=public --publish-branch=master",
+    "ci:release": "pnpm changeset -r publish --tag latest --registry=https://registry.npmjs.com --no-git-checks --access=public --publish-branch=master && pnpm ci:publish",
+    "ci:publish": "pnpm -r publish -F helpers -F utils --tag latest --registry=https://registry.npmjs.com/ --no-git-checks --access=public --publish-branch=master",
     "prepare": "husky install"
   },
   "dependencies": {

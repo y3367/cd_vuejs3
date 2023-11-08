@@ -1,5 +1,13 @@
 # @cd_vuejs3/helpers
 
+## 0.2.1
+
+### Patch Changes
+
+- update version
+- Updated dependencies
+  - @cd-vuejs3/utils@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
