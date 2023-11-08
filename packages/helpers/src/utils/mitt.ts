@@ -1,5 +1,6 @@
 // Custom changes based on the open source project `mitt`
 import { onUnmounted } from "vue";
+
 export type EventType = string | symbol;
 
 // An event handler can take an optional event argument

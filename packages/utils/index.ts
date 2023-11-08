@@ -1,4 +1,6 @@
 export * from "./src";
 
-import * as obj from "./src";
-export default obj;
+import * as cdUtils from "./src";
+
+export default cdUtils;
+export { cdUtils };

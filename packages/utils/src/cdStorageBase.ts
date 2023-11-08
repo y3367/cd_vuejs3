@@ -1,5 +1,3 @@
-import { setKeyWithEnv } from "./cdCommon";
-
 const STORAGE_TYPE_COOKIE: string = "cookie";
 const STORAGE_TYPE_LOCALSTORAGE: string = "localStorage";
 
@@ -14,7 +12,6 @@ if (typeof localStorage === "object") {
 }
 
 const get = (key: string): string | null | undefined => {
-  key = setKeyWithEnv(key);
   let val: string | null | undefined = undefined;
   switch (save_type) {
     case STORAGE_TYPE_LOCALSTORAGE:
@@ -27,7 +24,6 @@ const get = (key: string): string | null | undefined => {
 };
 
 const set = (key: string, val: any): void => {
-  key = setKeyWithEnv(key);
   switch (save_type) {
     case STORAGE_TYPE_LOCALSTORAGE:
       localStorage.setItem(key, val);
@@ -40,7 +36,6 @@ const set = (key: string, val: any): void => {
 };
 
 const remove = (key: string): void => {
-  key = setKeyWithEnv(key);
   switch (save_type) {
     case STORAGE_TYPE_LOCALSTORAGE:
       localStorage.removeItem(key);
@@ -50,13 +45,13 @@ const remove = (key: string): void => {
   }
 };
 
-interface CdStorageProps {
-  get: Function;
-  set: Function;
-  remove: Function;
+interface CdStorageBaseProps {
+  get: typeof get;
+  set: typeof set;
+  remove: typeof remove;
 }
 
-export const cdStorage: CdStorageProps = {
+export const cdStorageBase: CdStorageBaseProps = {
   get,
   set,
   remove

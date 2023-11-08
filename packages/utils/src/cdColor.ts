@@ -1,7 +1,7 @@
 /**
  * mixed color
  */
-export const mixColor = function (color1: string, color2: string, opacity: number) {
+export const mixColor = function (color1: string, color2: string, opacity: number = 1) {
   let red1 = parseInt(color1.slice(1, 3), 16);
   let green1 = parseInt(color1.slice(3, 5), 16);
   let blue1 = parseInt(color1.slice(5, 7), 16);

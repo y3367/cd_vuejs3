@@ -4,7 +4,7 @@
   "display": "Node 20",
   "compilerOptions": {
     "ignoreDeprecations": "5.0",
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     "skipLibCheck": true,
     "isolatedModules": true,
     "useDefineForClassFields": true,

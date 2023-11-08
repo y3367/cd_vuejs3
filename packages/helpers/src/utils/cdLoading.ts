@@ -6,7 +6,7 @@ import "element-plus/es/components/loading/style/index";
 
 const loadingInstance: Record<string, ReturnType<typeof ElLoading.service>> = {};
 
-class CdLoading {
+class ILoading {
   constructor(
     private readonly execLoading: (options?: LoadingOptions) => void,
     private readonly execClose: () => void
@@ -14,13 +14,16 @@ class CdLoading {
     this.execLoading = execLoading;
     this.execClose = execClose;
   }
+
   public number = 0;
+
   public loading(options?: LoadingOptions, number = 1) {
     this.number += number;
     this.execLoading(options);
   }
+
   public throttleClose = throttle(
-    function (this: CdLoading) {
+    function (this: ILoading) {
       if (this.number <= 0) {
         this.execClose();
         this.number = 0;
@@ -29,6 +32,7 @@ class CdLoading {
     220,
     { leading: false }
   );
+
   public close(number = 1) {
     if (this.number > 0) {
       this.number -= Math.min(this.number, number);
@@ -37,6 +41,7 @@ class CdLoading {
       this.forceClose();
     }
   }
+
   public forceClose() {
     this.number = 0;
     this.execClose();
@@ -45,11 +50,11 @@ class CdLoading {
 }
 
 export const cdLoadingObject = {
-  global: new CdLoading(
+  global: new ILoading(
     (options?: LoadingOptions) => (loadingInstance.global = ElLoading.service(options)),
     () => loadingInstance.global?.close()
   ),
-  layout: new CdLoading(
+  layout: new ILoading(
     (options?: LoadingOptions) => (loadingInstance.layout = ElLoading.service(Object.assign({ target: "#cd-main" }, options))),
     () => loadingInstance.layout?.close()
   )
@@ -69,3 +74,13 @@ export function closeCdLoading(force = false, number = 1, mode: keyof typeof cdL
   }
   loading.close(number);
 }
+
+interface CdLoadingProps {
+  open: typeof openCdLoading;
+  close: typeof closeCdLoading;
+}
+
+export const cdLoading: CdLoadingProps = {
+  open: openCdLoading,
+  close: closeCdLoading
+};

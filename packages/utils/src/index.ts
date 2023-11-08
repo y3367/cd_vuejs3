@@ -5,5 +5,5 @@ export * from "./cdCommon";
 export * from "./cdDay";
 export * from "./cdLog";
 export * from "./cdRandom";
-export * from "./cdStorage";
+export * from "./cdStorageBase";
 export * from "./cdURI";

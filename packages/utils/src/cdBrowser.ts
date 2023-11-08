@@ -1,7 +1,7 @@
 import bowser from "bowser";
 import MobileDetect from "mobile-detect";
 
-export const isMobile = () => {
+export const isMobile = (): boolean => {
   const mobileDetect = new MobileDetect(navigator.userAgent);
 
   return !!mobileDetect.os();

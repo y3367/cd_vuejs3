@@ -1,9 +1,4 @@
-import { cdLogError } from "./cdLog";
-
-export const setKeyWithEnv = (key: string): string => {
-  // @ts-ignore
-  return `${import.meta.env?.MODE ?? process.env?.NODE_MODE ?? "development"}_${import.meta.env?.VITE_APP_NAME ?? process.env?.APP_NAME ?? "CD"}_${key}`;
-};
+import { CdLog } from "./cdLog";
 
 export function isValidKey(key: string | number | symbol, object: object): key is keyof typeof object {
   if (!key || !object || typeof object !== "object") {
@@ -12,24 +7,24 @@ export function isValidKey(key: string | number | symbol, object: object): key i
   return key in object;
 }
 
-export const awaitWrap = <E, D = any>(promise: Promise<D>): Promise<[E | undefined, D | undefined]> => {
-  return promise.then<[undefined, D]>((data: D) => [undefined, data]).catch<[E, undefined]>((error: E) => [error, undefined]);
+export const awaitWrap = <E, D = any>(promise: Promise<D>): Promise<[E, D]> => {
+  return promise.then<[E, D]>((data: D) => [undefined as unknown as E, data]).catch<[E, D]>((error: E) => [error, undefined as unknown as D]);
 };
 
-export const awaitWraps = <E, T = any>(promises: (Promise<any> | T)[], logError: boolean = true): Promise<[E | undefined, any | undefined]> => {
+export const awaitWraps = <E, D = any>(promises: (Promise<D> | D)[], logError: boolean = true): Promise<[E, D[]]> => {
   return Promise.all(
-    promises.map((p: PromiseLike<any> | T) => {
+    promises.map((p: PromiseLike<D> | D) => {
       if (isValidKey("then", p as unknown as object)) {
-        return (p as Promise<any>).catch((e: E) => {
-          logError && cdLogError(e);
+        return (p as Promise<D>).catch((e: E) => {
+          logError && CdLog.logError(e);
         });
       } else {
         return p;
       }
     })
   )
-    .then<[undefined, any]>((data: any) => [undefined, data])
-    .catch<[E, undefined]>((error: E) => [error, undefined]);
+    .then<[E, D[]]>((data: any) => [undefined as unknown as E, data])
+    .catch<[E, D[]]>((error: E) => [error, undefined as unknown as D[]]);
 };
 
 export const fileToHump = function (fileName: string): string {
