@@ -34,7 +34,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "cypress": "^12.17.4"
+    "cypress": "^12.17.4",
+    "tslib": "^2.6.2"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
