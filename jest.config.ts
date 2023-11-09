@@ -1,3 +1,4 @@
+// https://jestjs.io/docs/getting-started
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "jsdom",

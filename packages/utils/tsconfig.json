@@ -25,7 +25,7 @@
     "module": "ESNext",
     "allowJs": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "target": "ESNext",
     "baseUrl": ".",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],

@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+//    "module": "CommonJS",
+    "module": "ESNext",
     "verbatimModuleSyntax": false,
-//    "module": "commonjs",
+    "useDefineForClassFields": false,
     "outDir": "./dist/cjs"
   }
 }

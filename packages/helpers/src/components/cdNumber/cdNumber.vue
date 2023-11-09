@@ -1,7 +1,7 @@
 <template>
   <span>
     <span class="cd-number-prefix" v-html="numberInfo.prefix" />
-    <span class="cd-number-output">{{ separate ? BnFormatAndSeparate(output, decimals, rounding, separator) : BnFormat(output, decimals, rounding) }}</span>
+    <span class="cd-number-output">{{ separate ? BnFormatAndSeparate(output, { n: decimals, rounding, separator }) : BnFormat(output, decimals, rounding) }}</span>
     <span class="cd-number-suffix" v-html="numberInfo.suffix" />
   </span>
 </template>

@@ -45,8 +45,8 @@
     "prebuild": "rimraf ./dist",
     "build": "npm run prebuild && npm run build:all",
     "build:all": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc --project tsconfig.cjs.json",
-    "build:esm": "tsc  --project tsconfig.esm.json",
+    "build:cjs": "rimraf ./dist/cjs && tsc --project tsconfig.cjs.json",
+    "build:esm": "rimraf ./dist/esm && tsc --project tsconfig.esm.json",
     "test": "jest"
   },
   "dependencies": {
