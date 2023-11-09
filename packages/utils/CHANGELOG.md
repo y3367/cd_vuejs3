@@ -1,5 +1,11 @@
 # @cd_vuejs3/utils
 
+## 0.2.4
+
+### Patch Changes
+
+- 1d95cf0: update version
+
 ## 0.2.3
 
 ### Patch Changes

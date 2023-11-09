@@ -1,5 +1,13 @@
 # @cd_vuejs3/helpers
 
+## 0.2.4
+
+### Patch Changes
+
+- 1d95cf0: update version
+- Updated dependencies [1d95cf0]
+  - @cd-vuejs3/utils@0.2.4
+
 ## 0.2.3
 
 ### Patch Changes
