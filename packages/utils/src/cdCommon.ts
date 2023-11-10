@@ -1,4 +1,4 @@
-import { CdLog } from "./cdLog";
+import { cdLog } from "./cdLog";
 
 export function isValidKey(key: string | number | symbol, object: object): key is keyof typeof object {
   if (!key || !object || typeof object !== "object") {
@@ -16,7 +16,7 @@ export const awaitWraps = <E, D = any>(promises: (Promise<D> | D)[], logError: b
     promises.map((p: PromiseLike<D> | D) => {
       if (isValidKey("then", p as unknown as object)) {
         return (p as Promise<D>).catch((e: E) => {
-          logError && CdLog.logError(e);
+          logError && cdLog.logError(e);
         });
       } else {
         return p;

@@ -14,7 +14,7 @@ export const cdLogChalk = (ci: ChalkInstance, message?: any, options?: LogOption
   console.log(ci(message, ...(options?.chalkParams ?? [])), ...(options?.logParams ?? []));
 };
 
-export const cdLog = (message?: any, options?: LogOptions) => {
+export const cdLogSuccess = (message?: any, options?: LogOptions) => {
   // console.log(message, ...optionalParams);
   const ci: ChalkInstance = cdChalkInstance().green;
   cdLogChalk(ci, message, options);
@@ -49,8 +49,8 @@ export const cdLogUnderline = (message?: any, options?: LogOptions) => {
 export interface CdLogProps {
   chalkInstance: typeof cdChalkInstance;
   logChalk: typeof cdLogChalk;
-  log: typeof cdLog;
-  logSuccess: typeof cdLog;
+  log: typeof cdLogSuccess;
+  logSuccess: typeof cdLogSuccess;
   logError: typeof cdLogError;
   logWarning: typeof cdLogWarning;
   logBlue: typeof cdLogBlue;
@@ -58,11 +58,11 @@ export interface CdLogProps {
   logUnderline: typeof cdLogUnderline;
 }
 
-export const CdLog: CdLogProps = {
+export const cdLog: CdLogProps = {
   chalkInstance: cdChalkInstance,
   logChalk: cdLogChalk,
-  log: cdLog,
-  logSuccess: cdLog,
+  log: cdLogSuccess,
+  logSuccess: cdLogSuccess,
   logError: cdLogError,
   logWarning: cdLogWarning,
   logBlue: cdLogBlue,

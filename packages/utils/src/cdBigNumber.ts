@@ -297,6 +297,18 @@ export const BnDivAll = ([...mulValues], [...divValues], n?: any, rounding?: any
 };
 
 /**
+ * calculate *`a % b = res`* and format *`res`*
+ * @param a first value as a
+ * @param b second value as b
+ * @param n fixed decimal places as n
+ * @param rounding rounding model when fixed decimal places as rounding, 0:UP;1:DOWN;2:CEIL;3:FLOOR;4:HALF_UP;5:HALF_DOWN;6:HALF_EVEN;7:HALF_CEIL;8:HALF_FLOOR;9:EUCLID;
+ * @return string
+ */
+export const BnMod = (a: any, b: any, n?: any, rounding?: any): string => {
+  return BnFormat(BnToDecimal(a).mod(BnToDecimal(b)), n, rounding);
+};
+
+/**
  * move the decimal point to the left,
  * such a:
  * `BnMovePointLeft(10000, 2) = 100`,
@@ -451,6 +463,7 @@ export interface CdBnProps {
   mulAll: typeof BnMulAll;
   div: typeof BnDiv;
   divAll: typeof BnDivAll;
+  mod: typeof BnMod;
   movePointLeft: typeof BnMovePointLeft;
   movePointRight: typeof BnMovePointRight;
   comparedTo: typeof BnComparedTo;
@@ -462,7 +475,7 @@ export interface CdBnProps {
   pow: typeof BnPow;
 }
 
-export const CdBn: CdBnProps = {
+export const cdBn: CdBnProps = {
   toDecimal: BnToDecimal,
   toNumber: BnToNumber,
   format: BnFormat,
@@ -476,6 +489,7 @@ export const CdBn: CdBnProps = {
   mulAll: BnMulAll,
   div: BnDiv,
   divAll: BnDivAll,
+  mod: BnMod,
   movePointLeft: BnMovePointLeft,
   movePointRight: BnMovePointRight,
   comparedTo: BnComparedTo,

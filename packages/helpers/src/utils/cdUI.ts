@@ -63,7 +63,7 @@ export interface CdFeedbackProps {
   notifyInfo: typeof cdNotifyInfo;
 }
 
-export const CdFeedback: CdFeedbackProps = {
+export const cdFeedback: CdFeedbackProps = {
   notify: cdNotify,
   notifySuccess: cdNotifySuccess,
   notifyError: cdNotifyError,

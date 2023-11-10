@@ -1,9 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
-import { CdLog, getDomain, isExternal, isUri } from "../src";
+import { cdLog, getDomain, isExternal, isUri } from "../src";
 
 describe("CD URI Test", (): void => {
   test("proper domain", (): void => {
-    CdLog.log(getDomain());
+    cdLog.log(getDomain());
   });
 
   test("proper check external", (): void => {
