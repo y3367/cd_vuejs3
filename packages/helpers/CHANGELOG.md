@@ -1,5 +1,16 @@
 # @cd_vuejs3/helpers
 
+## 0.3.0
+
+### Minor Changes
+
+- ffd5424: update version
+
+### Patch Changes
+
+- Updated dependencies [ffd5424]
+  - @cd-vuejs3/utils@0.3.0
+
 ## 0.2.5
 
 ### Patch Changes

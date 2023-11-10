@@ -1,5 +1,11 @@
 # @cd_vuejs3/utils
 
+## 0.3.0
+
+### Minor Changes
+
+- ffd5424: update version
+
 ## 0.2.5
 
 ### Patch Changes
