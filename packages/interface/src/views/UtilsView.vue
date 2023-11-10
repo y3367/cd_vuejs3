@@ -5,7 +5,33 @@ import CdNav from './NavView.vue'
 
 const nanoidRes = ref<string | undefined>(undefined)
 
-const bnObj = reactive({
+const bnObj = reactive<{
+  addA: any
+  addB: any
+  addRes: any
+  addList: any[]
+  addAllRes: any
+
+  subA: any
+  subB: any
+  subRes: any
+  subListA: any[]
+  subListB: any[]
+  subAllRes: any
+
+  mulA: any
+  mulB: any
+  mulRes: any
+  mulList: any[]
+  mulAllRes: any
+
+  divA: any
+  divB: any
+  divRes: any
+  divListA: any[]
+  divListB: any[]
+  divAllRes: any
+}>({
   addA: undefined,
   addB: undefined,
   addRes: undefined,

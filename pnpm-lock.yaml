@@ -218,10 +218,10 @@ importers:
   packages/interface:
     dependencies:
       '@cd-vuejs3/helpers':
-        specifier: 'workface: *'
+        specifier: 'workspace: *'
         version: link:../helpers
       '@cd-vuejs3/utils':
-        specifier: 'workface: *'
+        specifier: 'workspace: *'
         version: link:../utils
       element-plus:
         specifier: ^2.4.2

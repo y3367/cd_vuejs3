@@ -3,7 +3,13 @@ import { cdFeedback, cdLoading, cdStorage, setKeyWithEnv } from '@cd-vuejs3/help
 import { reactive } from 'vue'
 import CdNav from './NavView.vue'
 
-const helpersObj = reactive({
+const helpersObj = reactive<{
+  envKey: any
+  envKeyRes: any
+  storageKey: any
+  storageValue: any
+  storageRes: any
+}>({
   envKey: undefined,
   envKeyRes: undefined,
   storageKey: 'test-storage',
@@ -86,31 +92,31 @@ const removeStorage = () => {
         <div>test feedback</div>
         <el-button-group>
           <el-button type="success" @click="cdFeedback.notifySuccess('Tip success')"
-            >notify success(top-right)</el-button
-          >
+            >notify success(top-right)
+          </el-button>
           <el-button
             type="success"
             @click="cdFeedback.notifySuccess('Tip success', { position: 'top-left' })"
-            >notify success(top-left)</el-button
-          >
+            >notify success(top-left)
+          </el-button>
           <el-button
             type="success"
             @click="cdFeedback.notifySuccess('Tip success', { position: 'bottom-left' })"
-            >notify success(bottom-left)</el-button
-          >
+            >notify success(bottom-left)
+          </el-button>
           <el-button
             type="success"
             @click="cdFeedback.notifySuccess('Tip success', { position: 'bottom-right' })"
-            >notify success(bottom-right)</el-button
-          >
+            >notify success(bottom-right)
+          </el-button>
         </el-button-group>
         <el-button-group>
           <el-button type="warning" @click="cdFeedback.notifyWarning('Tip warning')"
-            >notify warning</el-button
-          >
+            >notify warning
+          </el-button>
           <el-button type="danger" @click="cdFeedback.notifyError('Tip danger')"
-            >notify danger</el-button
-          >
+            >notify danger
+          </el-button>
           <el-button type="info" @click="cdFeedback.notifyInfo('Tip info')">notify info</el-button>
         </el-button-group>
       </div>
