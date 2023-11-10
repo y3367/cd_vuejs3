@@ -1,7 +1,28 @@
 {
   "name": "@cd-vuejs3/interface",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.2.5",
+  "description": "vuejs3 interface example",
+  "keywords": [
+    "cd_vuejs3",
+    "interface"
+  ],
+  "author": "y3367",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/y3367/cd_vuejs3.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=7"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -13,8 +34,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@cd-vuejs3/helpers": "workface: *",
-    "@cd-vuejs3/utils": "workface: *",
+    "@cd-vuejs3/helpers": "workspace: *",
+    "@cd-vuejs3/utils": "workspace: *",
     "element-plus": "^2.4.2",
     "pinia": "^2.1.7",
     "vue": "^3.3.8",
