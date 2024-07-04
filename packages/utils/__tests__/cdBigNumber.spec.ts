@@ -4,6 +4,9 @@ import { cdBn } from "../src";
 
 describe("CD BigNumber Test", (): void => {
   test("proper toDecimal", (): void => {
+    console.log("----------------",cdBn.mul(2.222, new Decimal(1)))
+  });
+  test("proper toDecimal", (): void => {
     expect((): void => {
       cdBn.toDecimal("");
     }).toThrow("unknown value:  / undefined");

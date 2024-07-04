@@ -11,6 +11,7 @@
     "jsx": "preserve",
     "jsxImportSource": "vue",
     "sourceMap": true,
+    "inlineSourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "composite": true,
@@ -29,7 +30,7 @@
     "target": "ESNext",
     "baseUrl": ".",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "types": ["node", "jsdom"],
+    "types": ["node", "jsdom", "jest"],
     "outDir": "./dist/"
   }
 }

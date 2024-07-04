@@ -26,21 +26,6 @@ Decimal.set({
 });
 
 /**
- * console.log("new Decimal(0.938044659618614761):" + new Decimal(0.938044659618614761))
- * console.log("new Decimal('0.938044659618614761'):" + new Decimal('0.938044659618614761'))
- *
- * new Decimal(0.938044659618614761):0.9380446596186147
- * new Decimal('0.938044659618614761'):0.938044659618614761
- *
- * console.log("new Decimal(0.938044659618614773):" + new Decimal(0.938044659618614773))
- * console.log("new Decimal(0.938044659618614774):" + new Decimal(0.938044659618614774))
- *
- * new Decimal(0.938044659618614773):0.9380446596186147
- * new Decimal(0.938044659618614773):0.9380446596186148
- *
- */
-
-/**
  * convert value to *`Decimal`*
  * @param a first value as a
  * @param defaultValue default value
@@ -49,6 +34,9 @@ Decimal.set({
 export const BnToDecimal = (a: any, defaultValue?: any): Decimal => {
   if (typeof a === "string") {
     a = a.trim();
+  }
+  if (typeof a === "bigint") {
+    a = String(a);
   }
   if (a === undefined || a === null || (typeof a === "string" && a.trim() === "")) {
     if (defaultValue !== undefined && defaultValue !== null) {
@@ -348,13 +336,14 @@ export const BnMovePointRight = (a: any, mn: any, n?: any, rounding?: any): stri
  *  undefined  if the value of either Decimal is NaN.
  * @param a first value as a
  * @param b second value as b
+ * @param defaultValue default value
  * @return number
  */
-export const BnComparedTo = (a: any, b: any): number | undefined => {
+export const BnComparedTo = (a: any, b: any, defaultValue?: number): number => {
   try {
     return BnToDecimal(a).comparedTo(BnToDecimal(b));
   } catch (error) {
-    return undefined;
+    return defaultValue as unknown as number;
   }
 };
 
@@ -364,9 +353,9 @@ export const BnComparedTo = (a: any, b: any): number | undefined => {
  * @param values arguments {number|string|Decimal}
  * @return number
  */
-export const BnMin = (...values: any[]): Decimal | undefined => {
+export const BnMin = (...values: any[]): string | undefined => {
   try {
-    return Decimal.min(...values);
+    return BnFormat(Decimal.min(...values));
   } catch (error) {
     return undefined;
   }
@@ -378,12 +367,24 @@ export const BnMin = (...values: any[]): Decimal | undefined => {
  * @param values arguments {number|string|Decimal}
  * @return Decimal
  */
-export const BnMax = (...values: any[]): Decimal | undefined => {
+export const BnMax = (...values: any[]): string | undefined => {
   try {
-    return Decimal.max(...values);
+    return BnFormat(Decimal.max(...values));
   } catch (error) {
     return undefined;
   }
+};
+
+/**
+ * calculate *`a^b = res`* and format *`res`*
+ * @param a first value as a
+ * @param b denominator value as b
+ * @param n fixed decimal places as n
+ * @param rounding rounding model when fixed decimal places as rounding, 0:UP;1:DOWN;2:CEIL;3:FLOOR;4:HALF_UP;5:HALF_DOWN;6:HALF_EVEN;7:HALF_CEIL;8:HALF_FLOOR;9:EUCLID;
+ * @return string
+ */
+export const BnPow = (a: any, b: any, n?: any, rounding?: any): string => {
+  return BnFormat(BnToDecimal(a).toPower(BnToDecimal(b)), n, rounding);
 };
 
 /**
@@ -411,7 +412,7 @@ export const BnIsPositiveInteger = (data: any): Boolean => {
  * }
  * @return string
  */
-export function BnFormatAndSeparate<P extends { n?: any; rounding?: any; separator?: string; thousands?: number }>(a: any, options?: P): string {
+export function BnFormatAndSeparate<Options extends { n?: any; rounding?: any; separator?: string; thousands?: number }>(a: any, options?: Options): string {
   const value: string = BnFormat(a, options?.n, options?.rounding);
 
   const pointIndex: number = value.indexOf(".");
@@ -438,15 +439,122 @@ export const BnSeparate = (a: any, separator: string = ","): string => {
 };
 
 /**
- * calculate *`a^b = res`* and format *`res`*
+ * format value with unit and thousands separator,
+ * such as: `1024` -> `1K`, `1047552` -> `1,023K`
  * @param a first value as a
- * @param b denominator value as b
+ * @param options
+ * {
+ *  unit - current value unit
+ *  unitList - all available unit list, default `["", "K", "M", "G", "T", "P", "E", "Z", "Y", "B", "N", "D"]`
+ *  unitInterval - The interval between two adjacent units, default `1024`
+ *  n - fixed decimal places as n;
+ *  rounding - rounding model when fixed decimal places as rounding, 0:UP;1:DOWN;2:CEIL;3:FLOOR;4:HALF_UP;5:HALF_DOWN;6:HALF_EVEN;7:HALF_CEIL;8:HALF_FLOOR;9:EUCLID;
+ *  thousands - thousands, default `3`;
+ *  separator - thousands separator, default `,`
+ * }
+ * @return { value: string, unit: string }
+ */
+export function BnFormatUnitObj<
+  Options extends {
+    unit?: string;
+    unitList?: string[];
+    unitInterval?: number;
+    n?: any;
+    rounding?: any;
+    separator?: string;
+    thousands?: number;
+  }
+>(a: any, options?: Options): { value: string; unit: string } {
+  const unitList: string[] = options?.unitList ?? ["", "K", "M", "G", "T", "P", "E", "Z", "Y", "B", "N", "D"];
+  const unit: string = options?.unit ?? unitList?.[0] ?? "";
+  const unitInterval: number = options?.unitInterval ?? 1024;
+  const unitIndex: number = unitList.findIndex(val => val === unit);
+  a = BnToDecimal(a, 0);
+  if (!Decimal.isDecimal(a)) {
+    return {
+      unit,
+      value: "0"
+    };
+  }
+  const data = BnFormat(a, options?.n, options?.rounding);
+  const dataAbs = BnToDecimal(data).abs();
+  if ((unitIndex <= 0 && BnComparedTo(dataAbs, unitInterval) < 0) || (unitIndex >= unitList.length - 1 && BnComparedTo(dataAbs, 1) >= 0) || (BnComparedTo(dataAbs, 1) >= 0 && BnComparedTo(dataAbs, unitInterval) < 0)) {
+    return {
+      unit,
+      value: BnFormatAndSeparate(a, {
+        n: options?.n,
+        rounding: options?.rounding,
+        separator: options?.separator,
+        thousands: options?.thousands
+      })
+    };
+  }
+  if (BnComparedTo(dataAbs, 1) < 0) {
+    return BnFormatUnitObj(BnMul(a, unitInterval), {
+      unitList,
+      unitInterval,
+      n: options?.n,
+      rounding: options?.rounding,
+      separator: options?.separator,
+      thousands: options?.thousands,
+      unit: unitList.at(unitIndex - 1)
+    });
+  }
+  return BnFormatUnitObj(BnDiv(a, unitInterval, 48), {
+    unitList,
+    unitInterval,
+    n: options?.n,
+    rounding: options?.rounding,
+    separator: options?.separator,
+    thousands: options?.thousands,
+    unit: unitList.at(unitIndex + 1)
+  });
+}
+
+/**
+ * format value with unit and thousands separator,
+ * such as: `1024` -> `1K`, `1047552` -> `1,023K`
+ * @param a first value as a
+ * @param options
+ * {
+ *  unit - current value unit
+ *  unitList - all available unit list, default `["", "K", "M", "G", "T", "P", "E", "Z", "Y", "B", "N", "D"]`
+ *  unitInterval - The interval between two adjacent units, default `1024`
+ *  n - fixed decimal places as n;
+ *  rounding - rounding model when fixed decimal places as rounding, 0:UP;1:DOWN;2:CEIL;3:FLOOR;4:HALF_UP;5:HALF_DOWN;6:HALF_EVEN;7:HALF_CEIL;8:HALF_FLOOR;9:EUCLID;
+ *  thousands - thousands, default `3`;
+ *  separator - thousands separator, default `,`
+ *  slot - fill in between value and unit
+ * }
+ * @return string
+ */
+export function BnFormatUnit<
+  Options extends {
+    n?: any;
+    rounding?: any;
+    unit?: string;
+    unitList?: string[];
+    unitInterval?: number;
+    separator?: string;
+    thousands?: number;
+    slot?: string;
+  }
+>(a: any, options?: Options): string {
+  const obj = BnFormatUnitObj(a, options);
+  return `${obj?.value}${options?.slot ?? ""}${obj?.unit}`;
+}
+
+/**
+ * format value to percentage and convert to *`string`*
+ * such as: `1` -> `100%`, `0.001` -> `0.1%`
+ * @param a first value as a
  * @param n fixed decimal places as n
  * @param rounding rounding model when fixed decimal places as rounding, 0:UP;1:DOWN;2:CEIL;3:FLOOR;4:HALF_UP;5:HALF_DOWN;6:HALF_EVEN;7:HALF_CEIL;8:HALF_FLOOR;9:EUCLID;
  * @return string
  */
-export const BnPow = (a: any, b: any, n?: any, rounding?: any): string => {
-  return BnFormat(BnToDecimal(a).toPower(BnToDecimal(b)), n, rounding);
+export const BnFormatPercentage = (a: any, n?: any, rounding?: any): string => {
+  if (!a) return "0%";
+  return `${BnFormat(BnMul(a, 100), n, rounding)}%`;
 };
 
 export interface CdBnProps {
@@ -469,10 +577,13 @@ export interface CdBnProps {
   comparedTo: typeof BnComparedTo;
   min: typeof BnMin;
   max: typeof BnMax;
+  pow: typeof BnPow;
   isPositiveInteger: typeof BnIsPositiveInteger;
   separate: typeof BnSeparate;
   formatAndSeparate: typeof BnFormatAndSeparate;
-  pow: typeof BnPow;
+  formatUnitObj: typeof BnFormatUnitObj;
+  formatUnit: typeof BnFormatUnit;
+  formatPercentage: typeof BnFormatPercentage;
 }
 
 export const cdBn: CdBnProps = {
@@ -495,8 +606,11 @@ export const cdBn: CdBnProps = {
   comparedTo: BnComparedTo,
   min: BnMin,
   max: BnMax,
+  pow: BnPow,
   isPositiveInteger: BnIsPositiveInteger,
   separate: BnSeparate,
   formatAndSeparate: BnFormatAndSeparate,
-  pow: BnPow
+  formatUnitObj: BnFormatUnitObj,
+  formatUnit: BnFormatUnit,
+  formatPercentage: BnFormatPercentage
 };
